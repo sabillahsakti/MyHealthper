@@ -14,6 +14,9 @@ import IconMeal from './meal.svg'
 import IconCalculator from './calculator.svg'
 import IconNotification from './notification.svg'
 import IconSearch from './search.svg'
+import IconBack from './Back.svg'
+import IconLogout from './log-out.svg'
+import IconBookmark from './bookmark.svg'
 
 export {
     IconHome,
@@ -31,5 +34,8 @@ export {
     IconMeal,
     IconCalculator,
     IconNotification,
-    IconSearch
+    IconSearch,
+    IconBack,
+    IconLogout,
+    IconBookmark
 };

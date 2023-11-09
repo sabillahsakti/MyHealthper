@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, Image } from "react-native";
-import { Button } from '../../components'
+import { StyleSheet, View, Text, Image, SafeAreaView } from "react-native";
+import { Button, Input, ListMenu } from '../../components'
 import { clearStorage, getData } from '../../utils';
 import FIREBASE from '../../config/FIREBASE';
+import { dummyProfile } from '../../data'
 
 
 
@@ -12,6 +13,7 @@ export class Profile extends Component {
 
     this.state = {
       profile: false,
+      menus: dummyProfile
     }
   }
 
@@ -54,33 +56,32 @@ export class Profile extends Component {
     }
   }
   render() {
-    const { profile } = this.state
+    const { profile, menus } = this.state
     return (
-      <View style={styles.page}>
+      // <Button
+      //   type="text"
+      //   title={profile ? "Logout" : "Login"}
+      //   padding={13}
+      //   onPress={() => this.onSubmit(profile)}
+      // />
+      <SafeAreaView style={styles.page}>
+        <Text style={styles.header}>Profile</Text>
         <View style={styles.container}>
           <Image source={require('../../assets/images/avatar.png')} style={styles.foto} />
           <Text style={styles.nama}>{profile.nama}</Text>
-          <View style={styles.profile}>
-            <Text style={styles.boldTextBlack}>Data Diri</Text>
-            <View>
-              <Text style={styles.titleDD}>Email</Text>
-              <Text style={styles.valueDD}>{profile.email}</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+            <View style={styles.tbContainer}>
+              <Text style={{ fontSize: 20, fontFamily: 'bold' }}>{profile.beratBadan}</Text>
+              <Text>Berat Badan</Text>
             </View>
-            <View>
-              <Text style={styles.titleDD}>No HP</Text>
-              <Text style={styles.valueDD}>{profile.nohp}</Text>
-            </View>
-            <View>
-              <Button
-                type="text"
-                title={profile ? "Logout" : "Login"}
-                padding={13}
-                onPress={() => this.onSubmit(profile)}
-              />
+            <View style={styles.tbContainer}>
+              <Text style={{ fontSize: 20, fontFamily: 'bold'  }}>{profile.tinggiBadan}</Text>
+              <Text>Tinggi Badan</Text>
             </View>
           </View>
         </View>
-      </View>
+        <ListMenu menus={menus} navigation={this.props.navigation} kategori="profile"/>
+      </SafeAreaView>
     )
   }
 }
@@ -91,11 +92,12 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     width: '100%',
+    alignItems: 'center',
+    paddingVertical: 50
   },
   page: {
     backgroundColor: 'white',
     flex: 1,
-    justifyContent: 'center'
   },
   foto: {
     width: 150,
@@ -122,6 +124,26 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'space-between'
   },
+  tbContainer: {
+    marginTop: 10,
+    width: 100,
+    height: 100,
+    backgroundColor: 'white',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+    marginHorizontal: 10,
+    borderRadius: 20,
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   nama: {
     fontSize: 24,
     alignSelf: 'center'
@@ -139,5 +161,11 @@ const styles = StyleSheet.create({
   },
   valueDD: {
     fontSize: 14
+  },
+  header: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontFamily: 'bold',
+    marginVertical: 20
   }
 })

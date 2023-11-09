@@ -1,8 +1,8 @@
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { Component } from 'react'
 import { colors, responsiveHeight } from '../../utils'
-import { IconAdd, IconSearch } from '../../assets'
-import { Button, Jarak, ListResep } from '../../components'
+import { IconAdd, IconBack, IconSearch } from '../../assets'
+import { Button, Header, Jarak, ListResep } from '../../components'
 import { dummyResep } from '../../data'
 
 export class Resep extends Component {
@@ -20,6 +20,19 @@ export class Resep extends Component {
             selectedCategory: kategori
         })
     };
+    selesaiCari() {
+        const { search, dummyResep } = this.state;
+        const kataKunci = search.toLowerCase(); // Konversi kata kunci ke huruf kecil agar pencarian bersifat case-insensitive
+
+        // Filter data resep berdasarkan kata kunci
+        const hasilCari = dummyResep.filter((resep) =>
+            resep.judul.toLowerCase().includes(kataKunci) // Anda bisa menyesuaikan dengan properti data resep yang ingin Anda cari
+        );
+
+        this.setState({ filteredResep: hasilCari }); // Simpan hasil pencarian di state
+    }
+
+
     render() {
         const { search, kategoris, selectedCategory, dummyResep } = this.state
         const uniqueCategories = [...new Set(dummyResep.map(item => item.kategori))];
@@ -27,9 +40,7 @@ export class Resep extends Component {
 
         return (
             <SafeAreaView style={styles.page}>
-                <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                    <Text>Back</Text>
-                </TouchableOpacity>
+                <Header title="Resep Masakan" onBackPress={() => this.props.navigation.goBack()} />
                 <Text style={styles.judul}>Apa yang ingin kamu masak hari ini?</Text>
                 <View style={styles.wrapperHeader}>
                     {/* Input Search */}
@@ -63,7 +74,7 @@ export class Resep extends Component {
 
                 </View>
                 <View>
-                    <ListResep data={filteredResep} />
+                    <ListResep data={filteredResep} navigation={this.props.navigation}/>
                 </View>
             </SafeAreaView>
         )
@@ -123,5 +134,5 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: 'bold',
         fontSize: 13,
-    }
+    },
 })

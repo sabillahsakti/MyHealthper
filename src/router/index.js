@@ -1,6 +1,6 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {Home, Add, Profile, Login, Register1,Register2, Splash, Resep} from "../screens"
+import {Home, Add, Profile, Login, Register1,Register2, Splash, Resep, DetailResep} from "../screens"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import BottomNavigator from '../components/besar/BottomNavigator';
 
@@ -43,6 +43,11 @@ const Router = () => {
             <Stack.Screen 
                 name="Resep" 
                 component={Resep} 
+                options={{ headerShown: false }} 
+            />
+            <Stack.Screen 
+                name="Detail Resep" 
+                component={DetailResep} 
                 options={{ headerShown: false }} 
             /> 
         </Stack.Navigator>

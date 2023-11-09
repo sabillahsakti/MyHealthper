@@ -3,11 +3,11 @@ import React from 'react'
 import { FlatList } from 'react-native';
 import {CardMenu} from '../../kecil'
 
-const ListMenu = ({ menus, navigation }) => {
+const ListMenu = ({ menus, navigation, kategori }) => {
   return (
     <View style={styles.menuContainer}>
       {menus.map((item) => (
-        <CardMenu key={item.id} menu={item} navigation={navigation} />
+        <CardMenu key={item.id} menu={item} navigation={navigation} kategori={kategori}/>
       ))}
     </View>
   );
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   menuContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     marginBottom: 30
   },
 });

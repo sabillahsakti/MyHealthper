@@ -6,7 +6,8 @@ import Register1 from './Register/Register1'
 import Register2 from './Register/Register2'
 import Splash from "./Splash";
 import Resep from "./Resep";
+import DetailResep from "./Resep/DetailResep";
 
 
 
-export {Home, Profile, Add, Login, Register1, Splash, Register2, Resep}
+export {Home, Profile, Add, Login, Register1, Splash, Register2, Resep, DetailResep}

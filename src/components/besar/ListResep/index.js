@@ -2,7 +2,11 @@ import React from 'react';
 import { View, FlatList, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors } from '../../../utils';
 
-const ListResep = ({ data, onItemPress }) => {
+
+const ListResep = ({ data, onItemPress, navigation }) => {
+  onItemPress = (item) => {
+    navigation.navigate("Detail Resep", {item})
+  }
   return (
     <FlatList
       data={data}
@@ -11,6 +15,7 @@ const ListResep = ({ data, onItemPress }) => {
         <TouchableOpacity style={styles.itemContainer} onPress={() => onItemPress(item)}>
           <Image source={item.gambar} style={styles.image} />
           <Text style={styles.judul}>{item.judul}</Text>
+          <Text style={styles.kalori}>{item.kalori} Kalori</Text>
         </TouchableOpacity>
       )}
       numColumns={2}
@@ -41,6 +46,12 @@ const styles = StyleSheet.create({
     fontFamily: 'regular',
     fontSize: 14,
     marginTop: 8,
+  },
+  kalori: {
+    fontFamily: 'regular',
+    fontSize: 12,
+    color: colors.gray,
+    marginTop: 4,
   },
 });
 

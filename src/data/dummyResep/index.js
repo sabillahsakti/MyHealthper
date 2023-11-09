@@ -3,7 +3,7 @@ export const dummyResep = [
     {
         id: 1,
         kategori: 'Makanan Pokok',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Nasi Merah',
         isiResep: 'Nasi merah adalah makanan pokok yang kaya serat dan nutrisi. Nasi ini berasal dari beras merah yang belum mengalami penggilingan.',
         kalori: 150,
@@ -11,7 +11,7 @@ export const dummyResep = [
     {
         id: 2,
         kategori: 'Makanan Pokok',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Kentang Rebus',
         isiResep: 'Kentang rebus adalah makanan pokok yang rendah lemak dan kaya serat. Kentang direbus hingga empuk dan bisa disajikan dengan berbagai saus atau bumbu.',
         kalori: 120,
@@ -19,7 +19,7 @@ export const dummyResep = [
     {
         id: 3,
         kategori: 'Makanan Pokok',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Quinoa',
         isiResep: 'Quinoa adalah sumber karbohidrat yang kaya protein dan serat. Quinoa bisa dijadikan pengganti nasi dalam hidangan sehat.',
         kalori: 180,
@@ -27,7 +27,7 @@ export const dummyResep = [
     {
         id: 4,
         kategori: 'Makanan Pokok',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Roti Gandum Utuh',
         isiResep: 'Roti gandum utuh adalah sumber karbohidrat sehat. Roti ini diolah dari gandum utuh yang kaya serat dan nutrisi.',
         kalori: 100,
@@ -37,7 +37,7 @@ export const dummyResep = [
     {
         id: 5,
         kategori: 'Sayuran',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Brokoli Panggang',
         isiResep: 'Brokoli panggang adalah sayuran yang kaya akan vitamin dan serat. Brokoli dipanggang dengan sedikit minyak zaitun, garam, dan merica hingga empuk dan berwarna keemasan.',
         kalori: 80,
@@ -45,7 +45,7 @@ export const dummyResep = [
     {
         id: 6,
         kategori: 'Sayuran',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Salad Sayuran Hijau',
         isiResep: 'Salad sayuran hijau adalah campuran sayuran segar seperti daun selada, bayam, dan timun. Tambahkan dressing rendah lemak untuk hidangan yang sehat dan segar.',
         kalori: 60,
@@ -53,7 +53,7 @@ export const dummyResep = [
     {
         id: 7,
         kategori: 'Sayuran',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Wortel Panggang',
         isiResep: 'Wortel panggang adalah hidangan sayuran yang manis dan kaya vitamin A. Wortel dipanggang dengan madu dan kayu manis.',
         kalori: 70,
@@ -61,7 +61,7 @@ export const dummyResep = [
     {
         id: 8,
         kategori: 'Sayuran',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Bayam Tumis',
         isiResep: 'Bayam tumis adalah hidangan sayuran yang cepat dan mudah dibuat. Bayam ditumis dengan bawang putih, minyak zaitun, dan sedikit kecap asin.',
         kalori: 90,
@@ -71,7 +71,7 @@ export const dummyResep = [
     {
         id: 9,
         kategori: 'Hewani',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Ikan Salmon Panggang',
         isiResep: 'Ikan salmon panggang adalah sumber Hewani yang kaya asam lemak omega-3. Ikan ini dipanggang hingga matang sempurna dan bisa disajikan dengan lemon.',
         kalori: 250,
@@ -79,7 +79,7 @@ export const dummyResep = [
     {
         id: 10,
         kategori: 'Hewani',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Daging Ayam Panggang',
         isiResep: 'Daging ayam panggang adalah sumber Hewani rendah lemak. Ayam dipanggang dengan bumbu rempah hingga garing dan lezat.',
         kalori: 180,
@@ -87,7 +87,7 @@ export const dummyResep = [
     {
         id: 11,
         kategori: 'Hewani',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Ikan Tuna Salad',
         isiResep: 'Ikan tuna salad adalah hidangan ringan yang kaya protein. Tuna dicampur dengan mayones, bawang merah, dan selada.',
         kalori: 160,
@@ -95,7 +95,7 @@ export const dummyResep = [
     {
         id: 12,
         kategori: 'Hewani',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Sapi Lada Hitam',
         isiResep: 'Sapi lada hitam adalah hidangan daging sapi yang gurih dan pedas. Daging sapi disajikan dengan saus lada hitam dan paprika.',
         kalori: 220,
@@ -105,7 +105,7 @@ export const dummyResep = [
     {
         id: 13,
         kategori: 'Nabati',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Tofu Goreng',
         isiResep: 'Tofu goreng adalah sumber Nabati yang lezat. Tofu dipotong dadu, digoreng hingga kecokelatan, dan bisa disajikan dengan saus favorit Anda.',
         kalori: 120,
@@ -113,7 +113,7 @@ export const dummyResep = [
     {
         id: 14,
         kategori: 'Nabati',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Lentil Curry',
         isiResep: 'Lentil curry adalah hidangan kaya Nabati. Lentil dimasak dengan berbagai rempah-rempah dan saus tomat hingga menjadi hidangan kari yang lezat.',
         kalori: 200,
@@ -121,7 +121,7 @@ export const dummyResep = [
     {
         id: 15,
         kategori: 'Nabati',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Tahini Salad',
         isiResep: 'Tahini salad adalah hidangan salad yang menggunakan saus tahini sebagai dressing. Salad ini berisi sayuran segar dan saus yang kaya rasa.',
         kalori: 140,
@@ -129,7 +129,7 @@ export const dummyResep = [
     {
         id: 16,
         kategori: 'Nabati',
-        gambar: require('../../assets/images/avatar.png'),
+        gambar: require('../../assets/images/makanan.png'),
         judul: 'Burger Vegan',
         isiResep: 'Burger vegan adalah alternatif sehat bagi burger daging. Dibuat dari kacang-kacangan, sayuran, dan rempah-rempah.',
         kalori: 190,
