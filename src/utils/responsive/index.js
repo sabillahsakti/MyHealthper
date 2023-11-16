@@ -12,6 +12,11 @@ export const responsiveHeight = (height) => {
     return windowHeight*height/heightMobileUI;
 }
 
-export const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+export const removeCommas = (x) => {
+    if (x === undefined || x === null) {
+        return null; // or handle the case appropriately
+    }
+
+    const withoutCommas = x.toString().replace(/,/g, "");
+    return Math.floor(parseFloat(withoutCommas));
+  }

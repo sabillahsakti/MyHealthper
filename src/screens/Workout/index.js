@@ -3,51 +3,52 @@ import React, { Component } from 'react'
 import { colors, responsiveHeight } from '../../utils'
 import { IconAdd, IconBack, IconSearch } from '../../assets'
 import { Button, Header, Jarak, ListIsi } from '../../components'
-import { dummyResep } from '../../data'
+import { dummyWorkout } from '../../data'
 
-export class Resep extends Component {
+export class Workout extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             search: '',
-            selectedCategory: 'Makanan Pokok',
-            dummyResep: dummyResep
+            selectedCategory: 'Perut',
+            dummyWorkout: dummyWorkout
         }
     }
-    handleCategoryClick = (kategori) => {
+    handleCategoryClick = (category) => {
         this.setState({
-            selectedCategory: kategori
+            selectedCategory: category
         })
     };
     selesaiCari() {
-        const { search, dummyResep } = this.state;
+        const { search, dummyWorkout } = this.state;
         const kataKunci = search.toLowerCase(); // Konversi kata kunci ke huruf kecil agar pencarian bersifat case-insensitive
 
         // Filter data resep berdasarkan kata kunci
-        const hasilCari = dummyResep.filter((resep) =>
-            resep.judul.toLowerCase().includes(kataKunci) // Anda bisa menyesuaikan dengan properti data resep yang ingin Anda cari
+        const hasilCari = dummyWorkout.filter((workout) =>
+            workout.name.toLowerCase().includes(kataKunci) // Anda bisa menyesuaikan dengan properti data resep yang ingin Anda cari
         );
 
-        this.setState({ filteredResep: hasilCari }); // Simpan hasil pencarian di state
+        this.setState({ filteredWorkout: hasilCari }); // Simpan hasil pencarian di state
     }
 
+    
 
     render() {
-        const { search, kategoris, selectedCategory, dummyResep } = this.state
-        const uniqueCategories = [...new Set(dummyResep.map(item => item.kategori))];
-        const filteredResep = dummyResep.filter(resep => selectedCategory === resep.kategori);
+        const { search, selectedCategory, dummyWorkout } = this.state
+        const uniqueCategories = [...new Set(dummyWorkout.map(item => item.category))];
+        const filteredWorkout = dummyWorkout.filter(resep => selectedCategory === resep.category);
 
         return (
             <SafeAreaView style={styles.page}>
-                <Header title="Resep Masakan" onBackPress={() => this.props.navigation.goBack()} />
-                <Text style={styles.judul}>Apa yang ingin kamu masak hari ini?</Text>
+                <Header title="Workout" onBackPress={() => this.props.navigation.goBack()} />
+                <Text style={styles.judul}>Mau workout apa hari ini?</Text>
                 <View style={styles.wrapperHeader}>
                     {/* Input Search */}
                     <View style={styles.searchSection}>
                         <IconSearch />
                         <TextInput
-                            placeholder='Cari Makanan. . .'
+                            placeholder='Cari Workout. . .'
                             style={styles.input}
                             value={search}
                             onChangeText={(search) => this.setState({ search })}
@@ -58,29 +59,30 @@ export class Resep extends Component {
                 </View>
                 <View style={styles.filter}>
                     <Text style={{ fontSize: 16, fontFamily: 'bold' }}>Kategori</Text>
-                    <View style={styles.kategori}>
-                        {uniqueCategories.map((kategori, key) => (
+                    <View style={styles.category}>
+                        {uniqueCategories.map((category, key) => (
                             <Button
                                 key={key}
                                 type="kategori"
-                                title={kategori}
+                                title={category}
                                 padding={12}
-                                color={selectedCategory === kategori ? colors.primary : colors.white}
-                                colorTitle={selectedCategory === kategori ? colors.white : colors.primary}
-                                onPress={() => this.handleCategoryClick(kategori)}
+                                color={selectedCategory === category ? colors.primary : colors.white}
+                                colorTitle={selectedCategory === category ? colors.white : colors.primary}
+                                onPress={() => this.handleCategoryClick(category)}
                             />
                         ))}
                     </View>
+
                 </View>
                 <View>
-                    <ListIsi data={filteredResep} navigation={this.props.navigation} kategori="resep"/>
+                    <ListIsi data={filteredWorkout} navigation={this.props.navigation} kategori="workout"/>
                 </View>
             </SafeAreaView>
         )
     }
 }
 
-export default Resep
+export default Workout
 
 const styles = StyleSheet.create({
     page: {
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         marginHorizontal: 20
     },
-    kategori: {
+    category: {
         width: '100%',
         marginTop: 10,
         flexDirection: 'row',

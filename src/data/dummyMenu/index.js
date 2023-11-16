@@ -3,21 +3,22 @@ import { IconApi, IconCalculator, IconMeal, IconNotification, IconWorkout } from
 export const dummyMenu = [
     {
         id:1,
-        nama: 'Rekomendasi Resep',
-        gambar: <IconMeal/>,
-        halaman: 'Resep'
+        nama: 'Makanan',
+        gambar: <IconCalculator/>,
+        halaman: 'Makanan'
     },
     {
         id:2,
         nama: 'Workout',
         gambar: <IconWorkout/>,
-        halaman: 'ChangePassword'
+        halaman: 'Workout'
     },
     {
+        
         id:3,
-        nama: 'Kalkulator',
-        gambar: <IconCalculator/>,
-        halaman: 'History'
+        nama: 'Rekomendasi Resep',
+        gambar: <IconMeal/>,
+        halaman: 'Resep'
     },
     {
         id:4,

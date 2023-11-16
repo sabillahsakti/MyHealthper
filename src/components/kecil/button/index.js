@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     container: (padding, color) => ({
         backgroundColor: color ? color : colors.secondary,
         padding: padding,
-        borderRadius: '50%',
+        borderRadius: 50,
         marginTop: 7
     }),
     text: (fontSize, colorTitle) => ({

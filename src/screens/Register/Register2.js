@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, StyleSheet, View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
+import { TouchableOpacity, ScrollView, Text, StyleSheet, View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
 import { Input, Button, Jarak, Pilihan } from '../../components'
 import { registerUser } from '../../actions/AuthAction'
 import { colors, responsiveHeight, responsiveWidth } from '../../utils'
 import { RegisterIlustrasi } from '../../assets'
+import Modal from 'react-native-modal';
+
 
 export class Register2 extends Component {
   constructor(props) {
@@ -12,16 +14,62 @@ export class Register2 extends Component {
     this.state = {
       target: '',
       aktifitas: '',
-      umur: '',
-      tinggiBadan: '',
-      beratBadan: ''
+      umur: null,
+      tinggiBadan: null,
+      beratBadan: null,
+      jenisKelamin: '',
+      hasilBMR: null,
+      hasilIdeal: null,
+      isModalVisible: false
     }
   }
 
 
+  toggleModal = async (data) => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+    //Ke Auth Action
+    try {
+      const user = await registerUser(data, this.props.route.params.password);
+      this.props.navigation.replace('MainApp');
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
+  };
+
   onContinue = async () => {
-    const { target, aktifitas, umur, tinggiBadan, beratBadan } = this.state
-    if (target && aktifitas && umur && tinggiBadan && beratBadan) {
+    const { target, aktifitas, umur, tinggiBadan, beratBadan, jenisKelamin, hasilBMR, hasilIdeal } = this.state
+    let ak = null
+    let beratBadanIdeal = null
+    if (target && aktifitas && umur && tinggiBadan && beratBadan && jenisKelamin) {
+      if (aktifitas === 'Tidak terlalu aktif') {
+        ak = 1.4
+      } else if (aktifitas === 'Cukup aktif') {
+        ak = 1.5
+      } else {
+        ak = 1.7
+      }
+
+      beratBadanIdeal = tinggiBadan - 100;
+      if (jenisKelamin === 'Laki - Laki') {
+
+        await new Promise(resolve =>
+          this.setState(
+            {
+              hasilBMR: ((10 * beratBadan) + (6.25 * tinggiBadan) - (5 * umur) + 5) * ak,
+              hasilIdeal: ((10 * beratBadanIdeal) + (6.25 * tinggiBadan) - (5 * umur) + 5) * ak
+            },
+            resolve
+          ))
+      } else {
+        await new Promise(resolve =>
+          this.setState(
+            {
+              hasilBMR: ((10 * beratBadan) + (6.25 * tinggiBadan) - (5 * umur) - 16) * ak,
+              hasilIdeal: ((10 * beratBadanIdeal) + (6.25 * tinggiBadan) - (5 * umur) - 161) * ak,
+            },
+            resolve
+          ))
+      }
 
       const data = {
         nama: this.props.route.params.nama,
@@ -32,24 +80,23 @@ export class Register2 extends Component {
         umur: umur,
         tinggiBadan: tinggiBadan,
         beratBadan: beratBadan,
+        jenisKelamin: jenisKelamin,
+        kaloriHarian: this.state.hasilBMR,
+        kaloriIdeal: this.state.hasilIdeal,
+        kaloriSekarang: 0,
         status: 'user'
       }
 
-      //Ke Auth Action
-      // this.props.dispatch(registerUser(data, this.props.route.params.password))
-      try {
-        const user = await registerUser(data, this.props.route.params.password);
-        this.props.navigation.replace('MainApp');
-      } catch (error) {
-        Alert.alert('Error', error.message);
-      }
+      console.log(data)
+      this.toggleModal(data);
+      
 
     } else {
       Alert.alert("Error", "Data harus diisi semua")
     }
   }
   render() {
-    const { target, aktifitas, umur, tinggiBadan, beratBadan } = this.state
+    const { target, aktifitas, umur, tinggiBadan, beratBadan, jenisKelamin, isModalVisible, hasilBMR, hasilIdeal } = this.state
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -84,6 +131,14 @@ export class Register2 extends Component {
                   aktifitas: aktifitas,
                 })}
               />
+              <Pilihan
+                label="Jenis Kelamin"
+                datas={['Laki - Laki', 'Perempuan']}
+                selectedValue={jenisKelamin}
+                onValueChange={(jenisKelamin) => this.setState({
+                  jenisKelamin: jenisKelamin,
+                })}
+              />
               <Input
                 placeholder="Umur"
                 keyboardType="number-pad"
@@ -112,9 +167,26 @@ export class Register2 extends Component {
                 onPress={() => this.onContinue()}
               />
             </View>
+            <Modal isVisible={isModalVisible}>
+              <View style={styles.modalContainer}>
+                <View style={styles.header}>
+                  <Text style={styles.headerText}>Kalori Harian Anda</Text>
+                </View>
+                <Text style={styles.modalText}>{hasilBMR}</Text>
+                <View style={styles.header}>
+                  <Text style={styles.headerText}>Kalori Ideal Anda</Text>
+                </View>
+                <Text style={styles.modalText}>{hasilIdeal}</Text>
+                <TouchableOpacity onPress={this.toggleModal}>
+                  <View style={styles.closeButton}>
+                    <Text style={styles.closeButtonText}>Close</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </Modal>
           </ScrollView>
         </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingView >
     )
   }
 }
@@ -174,5 +246,45 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(40),
     position: 'absolute',
     zIndex: 1
-  }
+  },
+  modalContainer: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    position: 'relative',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginRight: 10,
+    color: '#333',
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 20,
+    color: '#555',
+  },
+  closeButton: {
+    backgroundColor: '#3498db',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+  closeButtonText: {
+    fontSize: 16,
+    color: 'white',
+  },
 })

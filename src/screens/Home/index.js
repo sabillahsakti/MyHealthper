@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, SafeAreaView, ScrollView, Keyboard } from 'react-native'
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Button, CategoryTab, Input, Jarak, ListMenu, ListNote } from '../../components'
-import { colors, getData, responsiveHeight } from '../../utils'
+import { colors, getData, responsiveHeight, removeCommas } from '../../utils'
 import { IconApi, IconMakan } from '../../assets'
 import { dummyMenu, dummyBerita } from '../../data';
 import ListBerita from '../../components/besar/ListBerita';
+
 
 export class Home extends Component {
   constructor(props) {
@@ -14,18 +15,24 @@ export class Home extends Component {
     this.state = {
       profile: false,
       menus: dummyMenu,
-      beritas: dummyBerita
+      beritas: dummyBerita,
+      progres: null,
+      kaloriSekarang: 0
     }
   }
 
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.getUserData();
+      this.setState({
+      })
     });
+
   }
 
   componentWillUnmount() {
     this._unsubscribe();
+
   }
 
   getUserData = () => {
@@ -35,7 +42,8 @@ export class Home extends Component {
         if (data) {
           console.log("isi data", data);
           this.setState({
-            profile: data
+            profile: data,
+            progres: (( data.kaloriSekarang / data.kaloriHarian) * 100)
           })
         } else {
           // this.props.navigation.replace('Login')
@@ -43,7 +51,7 @@ export class Home extends Component {
       })
   }
   render() {
-    const { profile, menus, beritas } = this.state
+    const { profile, menus, beritas, progres } = this.state
     return (
       <ScrollView style={styles.page} onPress={Keyboard.dismiss}>
         <View style={styles.page}>
@@ -52,22 +60,23 @@ export class Home extends Component {
             <Text style={styles.nama}>{profile.nama}</Text>
           </View>
           <View style={styles.card}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text style={styles.judul}>Target Harian</Text>
-            <Button type="text" title="tombol" padding={10} color={colors.white}/>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={styles.judul}>Target Harian</Text>
+              <Button type="text" title="tombol" padding={10} color={colors.white} />
             </View>
             <View style={styles.content}>
               <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <AnimatedCircularProgress
                   size={100}
                   width={20}
-                  fill={20}
+                  fill={progres}
                   tintColor={colors.primary}
                   backgroundColor="#3d5875">
                   {
                     (fill) => (
                       <Text>
-                        2600
+                        {removeCommas(profile.kaloriHarian)}
+                        {/* {profile.kaloriHarian} */}
                       </Text>
                     )
                   }
@@ -83,7 +92,7 @@ export class Home extends Component {
                 <Text style={styles.title}>Harus Dibakar</Text>
                 <View style={{ flexDirection: 'row' }}>
                   <IconApi />
-                  <Text style={{ marginTop: 7 }}>500</Text>
+                  <Text style={{ marginTop: 7 }}>{removeCommas(profile.kaloriHarian - profile.kaloriIdeal)}</Text>
                 </View>
               </View>
             </View>
@@ -97,7 +106,7 @@ export class Home extends Component {
           <View style={styles.card}>
             <Text style={styles.judul}>Artikel</Text>
             <View>
-              <ListBerita beritas={beritas} navigation={this.props.navigation}/>
+              <ListBerita beritas={beritas} navigation={this.props.navigation} />
             </View>
           </View>
         </View>

@@ -5,7 +5,7 @@ export const dummyProfile = [
         id:1,
         nama: 'Edit Profile',
         gambar: <IconEdit/>,
-        halaman: 'EditProfile'
+        halaman: 'Edit Profile'
     },
     {
         id:4,

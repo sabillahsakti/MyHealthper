@@ -3,7 +3,7 @@ import React from 'react';
 import { clearStorage, colors, responsiveHeight } from '../../../utils';
 import FIREBASE from '../../../config/FIREBASE';
 
-const CardMenu = ({ menu, navigation, kategori }) => {
+const CardMenu = ({ menu, navigation, kategori, data }) => {
   const onSubmit = () => {
     if (menu.halaman === "Login") {
       FIREBASE.auth().signOut().then(function () {
@@ -13,7 +13,7 @@ const CardMenu = ({ menu, navigation, kategori }) => {
         alert(error)
       })
     } else {
-      navigation.navigate(menu.halaman)
+      navigation.navigate(menu.halaman, {data})
     }
   }
   if (kategori === "profile") {

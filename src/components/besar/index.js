@@ -1,6 +1,7 @@
 import BottomNavigator from "./BottomNavigator";
 import ListMenu from "./ListMenu";
-import ListResep from "./ListResep"
+import ListIsi from "./ListIsi"
 import Header from "./Header"
+import Modall from "./Modal";
 
-export {BottomNavigator, ListMenu, ListResep, Header}
+export {BottomNavigator, ListMenu, ListIsi, Header, Modall}

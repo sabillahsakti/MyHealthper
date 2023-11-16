@@ -80,7 +80,7 @@ export class Profile extends Component {
             </View>
           </View>
         </View>
-        <ListMenu menus={menus} navigation={this.props.navigation} kategori="profile"/>
+        <ListMenu menus={menus} navigation={this.props.navigation} kategori="profile" data={profile}/>
       </SafeAreaView>
     )
   }

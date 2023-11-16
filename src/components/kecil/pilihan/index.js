@@ -17,15 +17,15 @@ const Pilihan = ({ label, datas, width, height, fontSize, selectedValue, onValue
                         <Picker.Item label="-- Pilih --" value="" />
                         <Picker.Item
                             label="Tidak terlalu aktif ( banyak aktivitas duduk, kerja kantoran, berseda, berkebun)"
-                            value="Tidak terlalu aktif ( banyak aktivitas duduk, kerja kantoran, berseda, berkebun)"
+                            value="Tidak terlalu aktif"
                         />
                         <Picker.Item
                             label="Cukup aktif (banyak aktivitas berdiri, seorang guru, ibu rumah tangga, menari)"
-                            value="Cukup aktif (banyak aktivitas berdiri, seorang guru, ibu rumah tangga, menari)"
+                            value="Cukup aktif"
                         />
                         <Picker.Item
                             label="Sangat aktif (banyak beraktivitas fisik, atletik)"
-                            value="Sangat aktif (banyak beraktivitas fisik, atletik)"
+                            value="Sangat aktif"
                         />
                     </Picker>
                 </View>
@@ -66,6 +66,24 @@ const Pilihan = ({ label, datas, width, height, fontSize, selectedValue, onValue
                             label="Kelola stress"
                             value="Kelola stress"
                         />
+                    </Picker>
+                </View>
+            </View>
+        )
+    } else {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.label(fontSize)}>{label} :</Text>
+                <View style={styles.wrapperPicker}>
+                    <Picker
+                        selectedValue={selectedValue}
+                        itemStyle={styles.picker(width, height, fontSize)}
+                        onValueChange={onValueChange}
+                    >
+                        <Picker.Item label="-- Pilih --" value="" />
+                        {datas.map((item, index) => (
+                            <Picker.Item label={item} value={item} key={index} />
+                        ))}
                     </Picker>
                 </View>
             </View>
