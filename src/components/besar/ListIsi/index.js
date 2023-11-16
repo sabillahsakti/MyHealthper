@@ -3,19 +3,20 @@ import { View, FlatList, Text, Image, StyleSheet, TouchableOpacity, Alert } from
 import { colors } from '../../../utils';
 import { Button } from '../../kecil';
 import { addWorkout } from '../../../actions/WorkoutAction';
+import { IconTambah } from '../../../assets';
 
 
 const ListIsi = ({ kategori, data, onItemPress, navigation }) => {
 
   onAddWorkout = async (data) => {
 
-      console.log(data)
-      try {
-        const user = await addWorkout(data);
-        Alert.alert("Berhasil", "Workout added successfully")
-      } catch (error) {
-        Alert.alert('Error', error.message);
-      }
+    console.log(data)
+    try {
+      const user = await addWorkout(data);
+      Alert.alert("Berhasil", "Workout added successfully")
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
     console.log(data)
   }
 
@@ -47,14 +48,14 @@ const ListIsi = ({ kategori, data, onItemPress, navigation }) => {
         data={data}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <>
-            <TouchableOpacity style={styles.itemContainer} onPress={() => onItemPress(item)}>
-              <Image source={item.image} style={styles.image} />
-              <Text style={styles.judul}>{item.name}</Text>
-              <Text style={styles.kalori}>{item.caloriesBurned} Kalori Dibakar / {item.quantity}</Text>
-              <Button type="text" title="Add" padding={5} onPress={()=>{this.onAddWorkout(item)}}/>
+          <View style={styles.itemContainer} >
+            <Image source={item.image} style={styles.image} />
+            <Text style={styles.judul}>{item.name}</Text>
+            <Text style={styles.kalori}>{item.caloriesBurned} Kalori Dibakar / {item.quantity}</Text>
+            <TouchableOpacity onPress={() => onItemPress(item)}>
+              <IconTambah />
             </TouchableOpacity>
-          </>
+          </View>
         )}
         numColumns={2}
         contentContainerStyle={styles.listContainer}

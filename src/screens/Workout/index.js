@@ -50,9 +50,6 @@ export class Workout extends Component {
                         <TextInput
                             placeholder='Cari Workout. . .'
                             style={styles.input}
-                            value={search}
-                            onChangeText={(search) => this.setState({ search })}
-                            onSubmitEditing={() => this.selesaiCari()}
                         />
                     </View>
                     <Jarak width={10} />

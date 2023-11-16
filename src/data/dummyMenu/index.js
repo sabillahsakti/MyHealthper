@@ -1,10 +1,10 @@
-import { IconApi, IconCalculator, IconMeal, IconNotification, IconWorkout } from "../../assets";
+import { IconApi, IconCalculator, IconMakanan, IconMeal, IconNotification, IconRecipe, IconWorkout } from "../../assets";
 
 export const dummyMenu = [
     {
         id:1,
         nama: 'Makanan',
-        gambar: <IconCalculator/>,
+        gambar: <IconMakanan/>,
         halaman: 'Makanan'
     },
     {
@@ -16,14 +16,14 @@ export const dummyMenu = [
     {
         
         id:3,
-        nama: 'Rekomendasi Resep',
-        gambar: <IconMeal/>,
+        nama: 'Resep',
+        gambar: <IconRecipe/>,
         halaman: 'Resep'
     },
-    {
-        id:4,
-        nama: 'Notifikasi',
-        gambar: <IconNotification/>,
-        halaman: 'Login'
-    },
+    // {
+    //     id:4,
+    //     nama: 'Notifikasi',
+    //     gambar: <IconNotification/>,
+    //     halaman: 'Login'
+    // },
 ];  

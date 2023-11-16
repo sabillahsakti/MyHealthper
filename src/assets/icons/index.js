@@ -9,7 +9,7 @@ import IconDelete from './Delete.svg'
 import IconLogo from './Logo.svg'
 import IconMakan from './fork-spoon.svg'
 import IconApi from './fire.svg'
-import IconWorkout from './workout.svg'
+import IconWorkout from './Workout1.svg'
 import IconMeal from './meal.svg'
 import IconCalculator from './calculator.svg'
 import IconNotification from './notification.svg'
@@ -17,6 +17,9 @@ import IconSearch from './search.svg'
 import IconBack from './Back.svg'
 import IconLogout from './log-out.svg'
 import IconBookmark from './bookmark.svg'
+import IconMakanan from "./makanan.svg"
+import IconRecipe from "./recipe.svg"
+import IconTambah from "./tambah.svg"
 
 export {
     IconHome,
@@ -37,5 +40,8 @@ export {
     IconSearch,
     IconBack,
     IconLogout,
-    IconBookmark
+    IconBookmark,
+    IconMakanan,
+    IconRecipe,
+    IconTambah
 };
