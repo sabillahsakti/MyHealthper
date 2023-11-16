@@ -1,5 +1,7 @@
 # MyHealthper
 
->Clone this repository
->npm install
->npx expo start
+1.Clone this repository
+
+2.npm install
+
+3.npx expo start
