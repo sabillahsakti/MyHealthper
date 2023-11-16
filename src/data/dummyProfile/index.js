@@ -1,4 +1,4 @@
-import { IconAdd, IconEdit, IconLogout } from "../../assets";
+import { IconAdd, IconEdit, IconHistory, IconLogout } from "../../assets";
 
 export const dummyProfile = [
     {
@@ -8,7 +8,13 @@ export const dummyProfile = [
         halaman: 'Edit Profile'
     },
     {
-        id:4,
+        id:3,
+        nama: 'History',
+        gambar: <IconHistory/>,
+        halaman: 'History'
+    },
+    {
+        id:2,
         nama: 'Sign Out',
         gambar: <IconLogout/>,
         halaman: 'Login'

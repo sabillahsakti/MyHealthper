@@ -26,25 +26,30 @@ export class Target extends Component {
 
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener('focus', async () => {
-      this.getUserData();
       const workouts = await getWorkout();
       const makanans = await getMakanan();
-      let totalWorkout = 0;
-      for (const workout of workouts) {
-        totalWorkout += workout.caloriesBurned;
-      }
+      
       let totalMakanan = 0;
       for (const makanan of makanans) {
         totalMakanan += makanan.kalori;
       }
+      let totalWorkout = 0;
+      for (const workout of workouts) {
+        totalWorkout += workout.caloriesBurned;
+      }
+  
       this.setState({
         userWorkouts: workouts,
         userMakanans: makanans,
         totalCaloriesBurned: totalWorkout,
         totalCaloriesMakanan: totalMakanan,
       });
+      console.log('Workouts data:', this.state.userWorkouts);
+console.log('Makanans data:', this.state.userMakanans);
+      this.getUserData(); // Memanggil metode getUserData setelah nilai-nilai di-update
     });
   }
+  
 
   componentWillUnmount() {
     this._unsubscribe();
@@ -117,7 +122,8 @@ export class Target extends Component {
     } = this.state;
     let remainHarianMessage = remainHarian <= 0 ? "Kalori Harian Cukup" : `Makan ${remainHarian} Lagi!`;
     let remainIdealMessage = remainIdeal <= 0 ? "Sudah Mencapai Ideal" : `Bakar ${remainIdeal} Lagi!`;
-
+console.log(totalCaloriesBurned)
+console.log(totalCaloriesMakanan)
     return (
       <View style={styles.page}>
         <View style={styles.header}>

@@ -9,7 +9,8 @@ import Resep from "./Resep";
 import DetailResep from "./Resep/DetailResep";
 import EditProfile from "./Profile/EditProfile";
 import Makanan from "./Makanan";
+import History from "./History";
 
 
 
-export {Home, Profile, Target, Login, Register1, Splash, Register2, Resep, DetailResep, EditProfile, Makanan}
+export {Home, Profile, Target, Login, Register1, Splash, Register2, Resep, DetailResep, EditProfile, Makanan, History}

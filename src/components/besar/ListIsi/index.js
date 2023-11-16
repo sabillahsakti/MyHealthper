@@ -52,7 +52,7 @@ const ListIsi = ({ kategori, data, onItemPress, navigation }) => {
             <Image source={item.image} style={styles.image} />
             <Text style={styles.judul}>{item.name}</Text>
             <Text style={styles.kalori}>{item.caloriesBurned} Kalori Dibakar / {item.quantity}</Text>
-            <TouchableOpacity onPress={() => onItemPress(item)}>
+            <TouchableOpacity onPress={() => onAddWorkout(item)}>
               <IconTambah />
             </TouchableOpacity>
           </View>

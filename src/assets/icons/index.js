@@ -20,6 +20,7 @@ import IconBookmark from './bookmark.svg'
 import IconMakanan from "./makanan.svg"
 import IconRecipe from "./recipe.svg"
 import IconTambah from "./tambah.svg"
+import IconHistory from "./history.svg"
 
 export {
     IconHome,
@@ -43,5 +44,6 @@ export {
     IconBookmark,
     IconMakanan,
     IconRecipe,
-    IconTambah
+    IconTambah,
+    IconHistory
 };

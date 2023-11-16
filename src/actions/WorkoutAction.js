@@ -3,50 +3,56 @@ import FIREBASE from '../config/FIREBASE'
 import { clearStorage, getData, storeData } from '../utils/localStorage';
 
 export const addWorkout = async (data) => {
-    try {
-      // Ambil data yg sudah login dari fungsi 'getData'
-      const userData = await getData('user');
-  
-      if (userData) {
-        // Tambah note sesuai uid
-        const dataBaru = {
-          ...data,
-          uid: userData.uid
-        };
-  
-        await FIREBASE.database().ref('workouts/' + userData.uid).push(dataBaru);
-  
-        console.log('Workout added successfully');
-      } else {
-        Alert.alert('Error', 'Login Terlebih Dahulu');
-      }
-    } catch (error) {
-      throw error;
+  try {
+    // Ambil data yang sudah login dari fungsi 'getData'
+    const userData = await getData('user');
+
+    if (userData) {
+      // Tambah note sesuai uid dan tambahkan tanggal hari ini
+      const dataBaru = {
+        ...data,
+        uid: userData.uid,
+        tanggal: new Date().toISOString().split('T')[0], // Mendapatkan tanggal hari ini dalam format YYYY-MM-DD
+      };
+
+      await FIREBASE.database().ref('workouts/' + userData.uid).push(dataBaru);
+
+      console.log('Workout added successfully');
+    } else {
+      Alert.alert('Error', 'Login Terlebih Dahulu');
     }
+  } catch (error) {
+    throw error;
   }
+};
   
-  export const getWorkout = async () => {
+export const getWorkout = async () => {
+  try {
     const userData = await getData('user');
     const notesRef = FIREBASE.database().ref('workouts/' + userData.uid);
-  
-    return notesRef.once('value')
-      .then((snapshot) => {
-        const workoutsData = snapshot.val();
-        if (workoutsData) {
-          const workoutsArray = Object.entries(workoutsData).map(([workoutId, workoutData]) => ({
-            workoutId,
-            ...workoutData,
-          }));
-          return workoutsArray;
-        } else {
-          return [];
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching user notes:', error);
-        return [];
-      });
-  };
+
+    const todayDate = new Date().toISOString().split('T')[0]; // Mendapatkan tanggal hari ini dalam format YYYY-MM-DD
+
+    const snapshot = await notesRef.orderByChild('tanggal').equalTo(todayDate).once('value');
+
+    const workoutsData = snapshot.val();
+
+    if (workoutsData) {
+      const workoutsArray = Object.entries(workoutsData).map(([workoutId, workoutdata]) => ({
+        workoutId,
+        ...workoutdata,
+      }));
+      return workoutsArray;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching user workouts:', error);
+    return [];
+  }
+};
+
+
 
   export const deleteWorkout = async (noteId) => {
     try {
@@ -73,3 +79,28 @@ export const addWorkout = async (data) => {
       throw error;
     }
   };
+
+  export const getAllWorkout = async () => {
+    try {
+      const userData = await getData('user');
+      const notesRef = FIREBASE.database().ref('workouts/' + userData.uid);
+  
+      const snapshot = await notesRef.once('value');
+  
+      const workoutsData = snapshot.val();
+  
+      if (workoutsData) {
+        const workoutsArray = Object.entries(workoutsData).map(([workoutId, workoutdata]) => ({
+          workoutId,
+          ...workoutdata,
+        }));
+        return workoutsArray;
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.error('Error fetching user workouts:', error);
+      return [];
+    }
+  };
+  

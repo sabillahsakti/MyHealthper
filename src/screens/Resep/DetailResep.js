@@ -12,11 +12,12 @@ export class DetailResep extends Component {
       judul: this.props.route.params.item.judul,
       gambar: this.props.route.params.item.gambar,
       isi: this.props.route.params.item.isiResep,
-      kalori: this.props.route.params.item.kalori
+      kalori: this.props.route.params.item.kalori,
+      langkah: this.props.route.params.item.langkah,
     }
   }
   render() {
-    const { judul, gambar, isi, kalori } = this.state
+    const { judul, gambar, isi, kalori, langkah } = this.state
     return (
       <View style={styles.page}>
         <ImageBackground source={gambar} style={styles.imageBackground}>
@@ -33,11 +34,18 @@ export class DetailResep extends Component {
             <View style={styles.garis} />
             <View style={styles.wrapperJenis}>
               <Text style={{ fontFamily: 'bold', marginRight: 3, fontSize: 15 }}>{kalori}</Text>
-              <Text style={{fontSize: 13}}>kkal</Text>
+              <Text style={{ fontSize: 13 }}>kkal</Text>
             </View>
             <View style={styles.isi}>
               <Text style={styles.jenis}>{isi}</Text>
             </View>
+            <Text style={styles.subJudul}>Langkah-langkah:</Text>
+            {langkah.map((step, index) => (
+              <View key={index} style={styles.langkahItem}>
+                <Text style={styles.langkahNumber}>{index + 1}</Text>
+                <Text style={styles.langkahText}>{step}</Text>
+              </View>
+            ))}
           </View>
         </View>
       </View>
@@ -111,5 +119,20 @@ const styles = StyleSheet.create({
   },
   isi: {
     marginTop: 10,
+  },
+  langkahItem: {
+    flexDirection: 'row',
+    marginVertical: 10,
+  },
+  langkahNumber: {
+    fontSize: 18,
+    fontFamily: 'bold',
+    marginRight: 10,
+    color: colors.primary,
+  },
+  langkahText: {
+    fontSize: 16,
+    fontFamily: 'regular',
+    flex: 1,
   },
 })
